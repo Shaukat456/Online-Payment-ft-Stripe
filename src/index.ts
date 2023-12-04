@@ -13,6 +13,18 @@ const app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
+app.get("/customer-list", async (req: Request, res: Response) => {
+  const limit = req.query.limit || 10;
+
+  const customers = await stripe.customers.list({
+    limit,
+  });
+  console.log(customers.data);
+  return res.send({
+    data: customers.data[0],
+  });
+});
+
 app.post("/create-customer", async (req: Request, res: Response) => {
   const { description } = req.body;
 
