@@ -1,8 +1,7 @@
 import express from "express";
-import { checkBalance } from "./controller";
 
 const router = express.Router();
 
-router.get("/check-balance", checkBalance);
+router.get("/create-payment-route");
 
 export default router;

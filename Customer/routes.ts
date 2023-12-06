@@ -6,7 +6,7 @@ import {
   listCustomers,
   searchCustomer,
   updateCustomer,
-} from "./customer";
+} from "./controller";
 
 const router = express.Router();
 
