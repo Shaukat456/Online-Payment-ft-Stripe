@@ -7,7 +7,6 @@ dotenv.config({
 });
 const API_KEY = process.env.API_KEY;
 const stripe = require("stripe")(API_KEY);
-console.log(API_KEY);
 
 async function checkBalance(req: Request, res: Response) {
   try {

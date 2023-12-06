@@ -1,13 +1,20 @@
 import express from "express";
-import { customersList } from "./customer";
+import {
+  createCustomer,
+  deleteCustomer,
+  getCustomer,
+  listCustomers,
+  searchCustomer,
+  updateCustomer,
+} from "./customer";
 
 const router = express.Router();
 
-router.get("/customer-list", customersList);
-router.post("/create-customer");
-router.post("/update-customer/:customerId/:orderId");
-router.delete("/get-customer/:customerId");
-router.delete("/delete-customer/:customerId");
-router.delete("/search-customers");
+router.get("/customer-list", listCustomers);
+router.post("/create-customer", createCustomer);
+router.post("/update-customer/:customerId/:orderId", updateCustomer);
+router.delete("/get-customer/:customerId", getCustomer);
+router.delete("/delete-customer/:customerId", deleteCustomer);
+router.delete("/search-customers", searchCustomer);
 
 export default router;
