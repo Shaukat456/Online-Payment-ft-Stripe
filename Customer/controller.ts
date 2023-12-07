@@ -113,7 +113,7 @@ export async function searchCustomer(req: Request, res: Response) {
 
   try {
     const allCustomers = await stripe.customers.list();
-    const filteredCustomers = allCustomers.data.filter((customer) => {
+    const filteredCustomers = allCustomers.data.filter((customer: any) => {
       return customer.name === name && customer.id === id;
     });
 

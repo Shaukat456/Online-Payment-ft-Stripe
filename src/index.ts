@@ -5,7 +5,8 @@ import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 import BalanceRoutes from "../Balance/routes";
 import CustomerRoutes from "../Customer/routes";
-import PaymentRoutes from "../Payment_Intent/routes";
+import PaymentIntentRoutes from "../Payment_Intent/routes";
+import PaymentMethodRoutes from "../Payment_Method/routes";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -28,6 +29,7 @@ app.use(limiter);
 
 app.use("/balance", BalanceRoutes);
 app.use("/customer", CustomerRoutes);
-app.use("/payment-intent", PaymentRoutes);
+app.use("/payment-intent", PaymentIntentRoutes);
+app.use("/payment-method", PaymentMethodRoutes);
 
 app.listen(80, () => console.log("Running on port 80"));
