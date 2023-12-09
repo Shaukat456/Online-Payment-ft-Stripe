@@ -11,12 +11,12 @@ const API_KEY = process.env.API_KEY;
 
 const stripe = require("stripe")(API_KEY);
 
-interface CardDetails {
+type CardDetailType = {
   number: string;
   exp_month: number;
   exp_year: number;
   cvc: string;
-}
+};
 export async function createPaymentMethod(req: Request, res: Response) {
   const { amount, currency, payment_method_types, cardDetails } = req.body;
 
@@ -28,7 +28,7 @@ export async function createPaymentMethod(req: Request, res: Response) {
         exp_month: 8,
         exp_year: 2026,
         cvc: "314",
-      } as CardDetails,
+      } as CardDetailType,
     });
     res.status(200).json({ paymentMethodId: paymentMethod.id });
   } catch (error) {

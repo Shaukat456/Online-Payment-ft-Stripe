@@ -7,20 +7,13 @@ import BalanceRoutes from "../Balance/routes";
 import CustomerRoutes from "../Customer/routes";
 import PaymentIntentRoutes from "../Payment_Intent/routes";
 import PaymentMethodRoutes from "../Payment_Method/routes";
+import Stripe from "stripe";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
   message: "Too many requests.",
 });
-
-dotenv.config({
-  path: path.resolve(__dirname, "../", ".env"),
-});
-
-const API_KEY = process.env.API_KEY;
-
-const stripe = require("stripe")(API_KEY);
 
 const app = express();
 app.use(express.json());

@@ -1,13 +1,9 @@
 import { Response, Request } from "express";
 import dotenv from "dotenv";
 import path from "path";
+import { stripeConfig } from "../References/stripe";
 
-dotenv.config({
-  path: path.resolve(__dirname, "../", ".env"),
-});
-const API_KEY = process.env.API_KEY;
-const stripe = require("stripe")(API_KEY);
-
+const stripe = stripeConfig();
 async function checkBalance(req: Request, res: Response) {
   try {
     const balance = await stripe.balance.retrieve();
