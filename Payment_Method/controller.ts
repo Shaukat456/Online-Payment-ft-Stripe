@@ -1,15 +1,11 @@
 import { Response, Request } from "express";
 import dotenv from "dotenv";
 import path from "path";
+
+import { stripeConfig } from "../References/stripe";
 import { handleErrorResponse } from "../utils";
 
-dotenv.config({
-  path: path.resolve(__dirname, "../", ".env"),
-});
-
-const API_KEY = process.env.API_KEY;
-
-const stripe = require("stripe")(API_KEY);
+const stripe = stripeConfig();
 
 type CardDetailType = {
   number: string;
@@ -33,7 +29,7 @@ export async function createPaymentMethod(req: Request, res: Response) {
     res.status(200).json({ paymentMethodId: paymentMethod.id });
   } catch (error) {
     console.error("Error creating payment method:", error);
-
+    handleErrorResponse(res, error);
     res.status(500).json({ error: "Error creating payment method" });
   }
 }
