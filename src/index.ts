@@ -5,6 +5,7 @@ import CustomerRoutes from "../Customer/routes";
 import PaymentIntentRoutes from "../Payment_Intent/routes";
 import PaymentMethodRoutes from "../Payment_Method/routes";
 import CheckoutSessionRoutes from "../Checkout_Session/routes";
+import PaymentLinkRoutes from "../Payment_Link/routes";
 import PricesRoutes from "../Prices/routes";
 import ProductRoutes from "../Product/routes";
 
@@ -26,5 +27,6 @@ app.use("/customer", CustomerRoutes);
 app.use("/payment-intent", PaymentIntentRoutes);
 app.use("/payment-method", PaymentMethodRoutes);
 app.use("/checkout", CheckoutSessionRoutes);
+app.use("/payment-link", PaymentLinkRoutes);
 
 app.listen(80, () => console.log("Running on port 80"));
