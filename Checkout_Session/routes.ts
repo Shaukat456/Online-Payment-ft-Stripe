@@ -1,8 +1,8 @@
 import express from "express";
-import { createCheckoutSession } from "./controller";
+import { createCheckoutSessionController } from "./controller";
 
 const router = express.Router();
 
-router.post("/create-checkout-session", createCheckoutSession);
+router.post("/create-checkout-session", createCheckoutSessionController);
 
 export default router;

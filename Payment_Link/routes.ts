@@ -1,8 +1,8 @@
 import express from "express";
-import { createPaymentLink } from "./controller";
+import { createPaymentLinkController } from "./controller";
 
 const router = express.Router();
 
-router.post("/create-payment-link", createPaymentLink);
+router.post("/create-payment-link", createPaymentLinkController);
 
 export default router;

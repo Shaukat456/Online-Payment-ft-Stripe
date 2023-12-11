@@ -8,6 +8,7 @@ import CheckoutSessionRoutes from "../Checkout_Session/routes";
 import PaymentLinkRoutes from "../Payment_Link/routes";
 import PricesRoutes from "../Prices/routes";
 import ProductRoutes from "../Product/routes";
+import mysql from "mysql2";
 
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000,
@@ -30,3 +31,19 @@ app.use("/checkout", CheckoutSessionRoutes);
 app.use("/payment-link", PaymentLinkRoutes);
 
 app.listen(80, () => console.log("Running on port 80"));
+
+// const connection = mysql.createConnection({
+//   host: "127.0.0.1",
+//   user: "root",
+//   password: "12345678",
+//   database: "stripe",
+//   port: 3306,
+// });
+
+// connection.connect(function (err) {
+//   if (err) {
+//     console.error("Error connecting to MySQL:", err);
+//     return;
+//   }
+//   console.log("Connected to MySQL");
+// });

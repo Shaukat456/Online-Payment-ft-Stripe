@@ -41,3 +41,15 @@ export async function getAllProducts(req: Request, res: Response) {
     res.status(500).json({ msg: "Error creating product", error: error });
   }
 }
+
+export async function createProduct(product_name: string) {
+  try {
+    const product = await stripe.products.create({
+      name: product_name,
+    });
+    return product.id;
+  } catch (error) {
+    console.error("Error creating Product", error);
+    return { msg: "Error creating product", error: error };
+  }
+}
