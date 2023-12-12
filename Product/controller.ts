@@ -57,7 +57,7 @@ export async function createProduct(product_name: string, available: boolean) {
   try {
     const product = await stripe.products.create({
       name: product_name,
-      active: true,
+      active: available,
     });
     return product.id;
   } catch (error) {

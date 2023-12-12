@@ -11,14 +11,18 @@ export const stripeFlow = async (req: Request, res: Response) => {
     available,
   } = req.body;
 
+  let response;
+
   try {
     const productId = await createProduct(product_name, available);
+    console.log("product created ");
     try {
       const priceId = await createPrice({
         product: productId,
         currency: "usd",
         unit_amount: 2000,
       });
+      console.log("Price Created ");
 
       try {
         const paymentLink = await createPaymentLink({
@@ -26,19 +30,31 @@ export const stripeFlow = async (req: Request, res: Response) => {
           quantity: product_quantity,
         });
 
-        res.send({
-          msg: "payment link",
-          paymentLink: paymentLink,
-        });
+        console.log("Payment Link Created");
+        response = {
+          msg: "success ",
+          paymentLink,
+        };
       } catch (error) {
+        response = {
+          msg: "Error",
+          error,
+        };
         console.log(error);
       }
     } catch (error) {
       console.log(error);
+      response = {
+        msg: "Error",
+        error,
+      };
     }
   } catch (error) {
-    return error;
+    response = {
+      msg: "Error",
+      error,
+    };
   } finally {
-    console.log("finally");
+    res.send(response);
   }
 };
