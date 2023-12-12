@@ -1,5 +1,9 @@
 customer login karayga
 auth0 
 
-
+db entry > 
 productid->price->
+
+new game ? 
+
+
