@@ -11,7 +11,7 @@ export const stripeFlow = async (req: Request, res: Response) => {
     available,
   } = req.body;
 
-  let response;
+  let response: {};
 
   try {
     const productId = await createProduct(product_name, available);

@@ -11,6 +11,7 @@ import ProductRoutes from "../Product/routes";
 import FlowRoutes from "../Flow/routes";
 import mongoose, { mongo } from "mongoose";
 import { stripeFlow } from "../Flow/Controller";
+import mysql from "mysql2";
 
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000,
@@ -22,17 +23,39 @@ import { stripeFlow } from "../Flow/Controller";
 const app = express();
 app.use(express.json());
 app.use(express.static("public"));
-async function connectToDatabase() {
-  try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/stripe");
-    console.log("Connection successful");
-  } catch (error) {
-    console.error("Connection error:", error);
-    return error;
-  }
-}
+// async function connectToDatabase() {
+//   try {
+//     await mongoose.connect("mongodb://127.0.0.1:27017/stripe");
+//     console.log("Connection successful");
+//   } catch (error) {
+//     console.error("Connection error:", error);
+//     return error;
+//   }
+// }
 
-connectToDatabase();
+// connectToDatabase();
+
+// create the connection to database
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "transactions",
+  password: "12345678",
+});
+
+connection.query("SELECT * ", function (err, results, fields) {
+  console.log(results); // results contains rows returned by server
+  console.log(fields);
+  console.log(err); // fields contains extra meta data about results, if available
+});
+// with placeholder
+connection.query(
+  "SELECT * FROM `table` WHERE `name` = ? AND `age` > ?",
+  ["Page", 45],
+  function (err, results) {
+    console.log(results);
+  }
+);
 
 app.use("/balance", BalanceRoutes);
 app.use("/product", ProductRoutes);
