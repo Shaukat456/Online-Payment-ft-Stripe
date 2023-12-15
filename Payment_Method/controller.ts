@@ -14,7 +14,7 @@ type CardDetailType = {
   cvc: string;
 };
 export async function createPaymentMethod(req: Request, res: Response) {
-  const { amount, currency, payment_method_types, cardDetails } = req.body;
+  const { cardDetails } = req.body;
 
   try {
     const paymentMethod = await stripe.paymentMethods.create({

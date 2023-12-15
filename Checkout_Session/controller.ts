@@ -13,7 +13,10 @@ type checkoutSessionType = {
   mode: PaymentModeType;
 };
 
-export async function createCheckoutSession(req: Request, res: Response) {
+export async function createCheckoutSessionController(
+  req: Request,
+  res: Response
+) {
   const {
     priceID,
     quantity,
@@ -35,9 +38,39 @@ export async function createCheckoutSession(req: Request, res: Response) {
       .status(200)
       .json({ msg: "Session Created Successfully", Session: session });
   } catch (error) {
+    handleErrorResponse(res, error);
     console.error("Error creating payment method:", error);
     res
       .status(500)
       .json({ msg: "Error creating checkout session", error: error });
+  }
+}
+
+export async function createCheckoutSession(
+  checkoutSession: checkoutSessionType
+) {
+  const {
+    priceID,
+    quantity,
+    mode = "payment",
+  } = checkoutSession as checkoutSessionType;
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      success_url: "https://example.com/success",
+      line_items: [
+        {
+          price: priceID || "price_1OM7jnJHWmuzyaR07zKI7ubN",
+          quantity: quantity | 1,
+        },
+      ],
+      mode: mode as PaymentModeType | "payment",
+    });
+
+    console.log(session.Session);
+    return session.Session.id;
+  } catch (error) {
+    console.error("Error creating payment method:", error);
+    return error;
   }
 }

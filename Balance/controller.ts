@@ -4,7 +4,7 @@ import path from "path";
 import { stripeConfig } from "../References/stripe";
 
 const stripe = stripeConfig();
-async function checkBalance(req: Request, res: Response) {
+export async function checkBalance(req: Request, res: Response) {
   try {
     const balance = await stripe.balance.retrieve();
     res.status(200).json({ success: true, balance });
@@ -29,5 +29,3 @@ async function checkBalance(req: Request, res: Response) {
     }
   }
 }
-
-export { checkBalance };
